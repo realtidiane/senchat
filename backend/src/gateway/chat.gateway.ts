@@ -50,7 +50,7 @@ interface TypingPayload {
 
 @WebSocketGateway({
   cors: {
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    origin: true, // reflect request origin — allows any LAN device in dev
     credentials: true,
   },
 })

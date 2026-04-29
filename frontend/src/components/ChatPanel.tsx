@@ -9,10 +9,13 @@ import { api } from '../lib/api';
 import type { Conversation } from '@senchat/shared';
 import { getInitials } from '../lib/utils';
 
+// Stable reference to avoid infinite re-render loop in Zustand selector
+const EMPTY_TYPING: string[] = [];
+
 export function ChatPanel() {
   const conversationId = useConversationStore((s) => s.activeConversationId);
   const typingUsers = useConversationStore((s) =>
-    conversationId ? s.typingUsers[conversationId] || [] : [],
+    conversationId ? (s.typingUsers[conversationId] ?? EMPTY_TYPING) : EMPTY_TYPING,
   );
   const currentUserId = useAuthStore((s) => s.user?.id);
   const messagesEndRef = useRef<HTMLDivElement>(null);
