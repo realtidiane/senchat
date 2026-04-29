@@ -1,12 +1,14 @@
 import { NestFactory } from '@nestjs/core';
+import { NestExpressApplication } from '@nestjs/platform-express';
 import { ValidationPipe } from '@nestjs/common';
+import { join } from 'path';
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const cookieParser = require('cookie-parser');
 import { AppModule } from './app.module';
 import { GlobalExceptionFilter } from './common/filters/http-exception.filter';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   app.use(cookieParser());
 
@@ -24,6 +26,7 @@ async function bootstrap() {
   );
 
   app.setGlobalPrefix('api');
+  app.useStaticAssets(join(__dirname, '..', 'uploads'), { prefix: '/uploads' });
   app.useGlobalFilters(new GlobalExceptionFilter());
 
   const port = process.env.BACKEND_PORT || 3000;
