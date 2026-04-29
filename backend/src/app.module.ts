@@ -8,6 +8,7 @@ import { UsersModule } from './users/users.module';
 import { ConversationsModule } from './conversations/conversations.module';
 import { MessagesModule } from './messages/messages.module';
 import { FilesModule } from './files/files.module';
+import { GatewayModule } from './gateway/gateway.module';
 import { IS_PUBLIC_KEY } from './common/decorators/public.decorator';
 
 @Injectable()
@@ -35,6 +36,7 @@ class JwtAuthGuard extends AuthGuard('jwt') {
     ConversationsModule,
     MessagesModule,
     FilesModule,
+    GatewayModule,
   ],
   providers: [
     { provide: APP_GUARD, useClass: ThrottlerGuard },
