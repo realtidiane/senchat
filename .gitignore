@@ -8,3 +8,7 @@ Thumbs.db
 *.log
 coverage/
 .turbo/
+.claude/
+docs/
+frontend/tsconfig.tsbuildinfo
+
