@@ -6,6 +6,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ConversationsModule } from './conversations/conversations.module';
+import { MessagesModule } from './messages/messages.module';
 import { IS_PUBLIC_KEY } from './common/decorators/public.decorator';
 
 @Injectable()
@@ -31,6 +32,7 @@ class JwtAuthGuard extends AuthGuard('jwt') {
     AuthModule,
     UsersModule,
     ConversationsModule,
+    MessagesModule,
   ],
   providers: [
     { provide: APP_GUARD, useClass: ThrottlerGuard },
