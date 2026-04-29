@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --color-primary: #00853F;
+    --color-accent: #C7A500;
+    --color-danger: #E31B23;
+    --color-bg: #FFFFFF;
+    --color-surface: #F0F2F5;
+    --color-input: #FFFFFF;
+    --color-bubble-out: #D9FDD3;
+    --color-bubble-in: #FFFFFF;
+    --color-text-primary: #111B21;
+    --color-text-secondary: #667781;
+    --color-border: #E9EDEF;
+  }
+
+  .dark {
+    --color-accent: #FDEF42;
+    --color-bg: #0B141A;
+    --color-surface: #1F2C34;
+    --color-input: #233039;
+    --color-bubble-out: #005C4B;
+    --color-bubble-in: #1F2C34;
+    --color-text-primary: #E9EDEF;
+    --color-text-secondary: #8696A0;
+    --color-border: #2A3942;
+  }
+
+  body {
+    @apply bg-[var(--color-bg)] text-[var(--color-text-primary)] font-sans;
+  }
+}
