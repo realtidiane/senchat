@@ -4,6 +4,7 @@ import { APP_GUARD, Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 import { IS_PUBLIC_KEY } from './common/decorators/public.decorator';
 
 @Injectable()
@@ -27,6 +28,7 @@ class JwtAuthGuard extends AuthGuard('jwt') {
     ThrottlerModule.forRoot([{ ttl: 60000, limit: 60 }]),
     PrismaModule,
     AuthModule,
+    UsersModule,
   ],
   providers: [
     { provide: APP_GUARD, useClass: ThrottlerGuard },
