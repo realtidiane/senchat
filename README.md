@@ -4,7 +4,7 @@
 
 ### Messagerie instantanée temps réel aux couleurs du Sénégal
 
-*Une application de chat moderne inspirée de WhatsApp, construite avec une identité visuelle sénégalaise — vert national, or et rouge.*
+*Une application de chat moderne inspirée de WhatsApp, construite avec une identité visuelle sénégalaise — vert, jaune et rouge.*
 
 [![Status](https://img.shields.io/badge/status-MVP-success?style=flat-square)](https://github.com/realtidiane/senchat)
 [![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
@@ -349,7 +349,7 @@ Identité visuelle inspirée du **drapeau du Sénégal** 🇸🇳
 | Token | Hex | Usage |
 |-------|-----|-------|
 | 🟢 `sn-green` | `#00853F` | Couleur principale, accents, statut en ligne |
-| 🟡 `sn-gold` | `#FDEF42` | Accent secondaire (mode sombre) |
+| 🟡 `sn-yellow` | `#FDEF42` | Accent secondaire (mode sombre) |
 | 🔴 `sn-red` | `#E31B23` | Erreurs, actions destructives |
 
 **Police** : [Inter](https://fonts.google.com/specimen/Inter) — moderne, lisible, optimisée pour les écrans.

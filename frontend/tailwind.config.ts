@@ -8,8 +8,8 @@ const config: Config = {
       colors: {
         sn: {
           green: '#00853F',
-          gold: '#FDEF42',
-          'gold-dark': '#C7A500',
+          yellow: '#FDEF42',
+          'yellow-dark': '#C7A500',
           red: '#E31B23',
         },
         dark: {
