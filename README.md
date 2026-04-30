@@ -1,92 +1,173 @@
-# SenChat
+<div align="center">
 
-Application de messagerie instantanée temps réel avec une identité visuelle sénégalaise — inspirée de WhatsApp, construite avec les couleurs nationales du Sénégal (vert, or, rouge).
+# 🇸🇳 SenChat
 
-![SenChat](https://img.shields.io/badge/SenChat-MVP-00853F?style=for-the-badge)
-![NestJS](https://img.shields.io/badge/NestJS-10-E0234E?style=for-the-badge&logo=nestjs)
-![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react)
-![Socket.IO](https://img.shields.io/badge/Socket.IO-4-010101?style=for-the-badge&logo=socketdotio)
-![MySQL](https://img.shields.io/badge/MySQL-8-4479A1?style=for-the-badge&logo=mysql)
+### Messagerie instantanée temps réel aux couleurs du Sénégal
+
+*Une application de chat moderne inspirée de WhatsApp, construite avec une identité visuelle sénégalaise — vert national, or et rouge.*
+
+[![Status](https://img.shields.io/badge/status-MVP-success?style=flat-square)](https://github.com/realtidiane/senchat)
+[![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
+[![NestJS](https://img.shields.io/badge/NestJS-10-E0234E?style=flat-square&logo=nestjs&logoColor=white)](https://nestjs.com)
+[![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Socket.IO](https://img.shields.io/badge/Socket.IO-4-010101?style=flat-square&logo=socketdotio&logoColor=white)](https://socket.io)
+[![MySQL](https://img.shields.io/badge/MySQL-8-4479A1?style=flat-square&logo=mysql&logoColor=white)](https://www.mysql.com)
+
+[Fonctionnalités](#-fonctionnalités) •
+[Stack](#-stack-technique) •
+[Démarrage rapide](#-démarrage-rapide) •
+[Architecture](#-architecture) •
+[API](#-api-rest) •
+[Roadmap](#-roadmap)
+
+</div>
 
 ---
 
-## Fonctionnalités
+## 📖 À propos
 
-- **Authentification** — Inscription, connexion, déconnexion avec JWT (access token 15min + refresh token httpOnly 7j)
-- **Conversations directes** — Chat 1:1 avec déduplication automatique
-- **Groupes** — Création de groupes jusqu'à 256 membres, rôles (OWNER / ADMIN / MEMBER)
-- **Temps réel** — Messages, indicateurs de frappe, statut en ligne via Socket.IO
-- **Partage de fichiers** — Images, PDF, documents (jusqu'à 25 Mo)
-- **Statut des messages** — Lu / non lu avec compteur de non-lus
-- **Profil** — Modification du nom, bio, avatar
-- **Thème** — Mode sombre (défaut) / mode clair
-- **Responsive** — Mobile-first, sidebar repliable
-- **Accès réseau local** — Accessible depuis tous les appareils du réseau local
+**SenChat** est une plateforme de messagerie instantanée full-stack qui combine la simplicité de WhatsApp avec une identité visuelle ancrée dans la culture sénégalaise. Conçue pour la communication moderne — conversations privées, groupes jusqu'à 256 membres, partage de fichiers, indicateurs de présence et de frappe en temps réel.
+
+> 💡 Ce projet sert également de référence d'architecture full-stack moderne avec NestJS, Prisma, React, Tailwind et Socket.IO.
 
 ---
 
-## Stack technique
+## ✨ Fonctionnalités
 
-### Monorepo (npm workspaces)
+### 🔐 Authentification & Sécurité
+- Inscription / connexion avec **JWT** (access 15min + refresh httpOnly 7j)
+- Hachage des mots de passe avec **bcrypt** (12 rounds)
+- Rate limiting sur les endpoints sensibles
+- Validation stricte avec `class-validator`
+- Protection CORS configurable
+
+### 💬 Messagerie temps réel
+- Conversations **directes** (1:1) avec déduplication automatique
+- **Groupes** jusqu'à 256 membres avec rôles (`OWNER`, `ADMIN`, `MEMBER`)
+- Indicateurs de **frappe** en temps réel
+- Statut **en ligne / hors ligne** avec dernière connexion
+- Statut **lu / non lu** avec compteur de non-lus
+- Pagination par **curseur** (chargement infini)
+
+### 📎 Partage de fichiers
+- Upload d'images (JPEG, PNG, WebP, GIF)
+- Documents (PDF, Word, Excel, TXT, ZIP)
+- Limite **25 Mo** par fichier
+- Validation MIME stricte côté serveur
+
+### 🎨 Interface
+- **Dark mode** par défaut + thème clair
+- Design **responsive** (mobile-first)
+- Sidebar repliable sur mobile
+- Couleurs nationales du Sénégal (vert `#00853F`, or, rouge)
+- Animations fluides
+- Icônes [Lucide](https://lucide.dev)
+
+### 🌍 Bonus
+- **Accès LAN** — utilisable depuis n'importe quel appareil du réseau local
+- Auto-détection du host pour l'API et les WebSockets
+- Recherche d'utilisateurs avec debounce
+- Suppression douce (soft delete) des messages
+
+---
+
+## 🛠 Stack technique
+
+<table>
+<tr>
+<td valign="top" width="50%">
+
+### Backend
+| Tech | Rôle |
+|------|------|
+| **NestJS 10** | Framework API modulaire |
+| **Prisma 6** | ORM type-safe |
+| **MySQL 8** | Base de données relationnelle |
+| **Socket.IO 4** | WebSocket temps réel |
+| **Passport JWT** | Authentification |
+| **bcrypt** | Hachage mots de passe |
+| **Multer** | Upload de fichiers |
+| **class-validator** | Validation DTOs |
+| **@nestjs/throttler** | Rate limiting |
+
+</td>
+<td valign="top" width="50%">
+
+### Frontend
+| Tech | Rôle |
+|------|------|
+| **React 18** | Bibliothèque UI |
+| **Vite 6** | Bundler ultra-rapide |
+| **TypeScript 5** | Typage statique |
+| **Tailwind CSS 3** | Styles utilitaires |
+| **Zustand 5** | État client (auth, UI) |
+| **TanStack Query 5** | État serveur + cache |
+| **socket.io-client** | WebSocket client |
+| **React Router 6** | Routing SPA |
+| **lucide-react** | Icônes |
+
+</td>
+</tr>
+</table>
+
+### 🏗 Architecture monorepo
+
+Géré avec **npm workspaces** — types et événements Socket.IO partagés entre front et back via `@senchat/shared`.
 
 ```
 senchat/
-├── shared/          # Types TypeScript partagés + contrats Socket.IO
-├── backend/         # API REST + WebSocket
-└── frontend/        # Interface React
+├── shared/      # Types TypeScript + contrats Socket.IO partagés
+├── backend/     # API NestJS + WebSocket gateway
+└── frontend/    # SPA React
 ```
 
-### Backend (`backend/`)
-| Technologie | Rôle |
-|---|---|
-| NestJS 10 | Framework API |
-| Prisma 6 | ORM |
-| MySQL 8 | Base de données |
-| Socket.IO 4 | Temps réel |
-| JWT + bcrypt | Auth sécurisée |
-| class-validator | Validation DTOs |
-| @nestjs/throttler | Rate limiting |
-
-### Frontend (`frontend/`)
-| Technologie | Rôle |
-|---|---|
-| React 18 | UI |
-| Vite 6 | Bundler |
-| Tailwind CSS 3 | Styles |
-| Zustand 5 | État client |
-| TanStack Query 5 | État serveur + cache |
-| socket.io-client | Temps réel |
-| React Router v6 | Routing |
-| lucide-react | Icônes |
-
 ---
 
-## Prérequis
+## 🚀 Démarrage rapide
 
-- **Node.js** 18+
-- **MySQL 8** en local (root sans mot de passe sur port 3306 par défaut)
-- **npm** 9+
+### Prérequis
 
----
+- **Node.js** ≥ 18
+- **npm** ≥ 9
+- **MySQL 8** en local (port 3306, root sans mot de passe par défaut)
 
-## Installation
-
-### 1. Cloner le projet
+### Installation en 4 étapes
 
 ```bash
+# 1. Cloner le projet
 git clone https://github.com/realtidiane/senchat.git
 cd senchat
-```
 
-### 2. Installer les dépendances
-
-```bash
+# 2. Installer les dépendances (workspaces)
 npm install
+
+# 3. Initialiser la base de données
+cd backend
+npx prisma migrate dev --name init
+npx prisma db seed
+
+# 4. Lancer (dans 2 terminaux séparés)
+# Terminal 1 — Backend
+npm run dev
+
+# Terminal 2 — Frontend
+cd ../frontend && npm run dev
 ```
 
-### 3. Configurer la base de données
+➡️ Ouvre [http://localhost:5173](http://localhost:5173)
 
-Le fichier `backend/.env` est déjà configuré pour MySQL local (root, sans mot de passe) :
+### 🔑 Comptes de test (créés par le seed)
+
+| 👤 Nom | 📧 Email | 🔒 Mot de passe |
+|---|---|---|
+| Alice Diallo | `alice@senchat.sn` | `password123` |
+| Bob Ndiaye | `bob@senchat.sn` | `password123` |
+| Charlie Sow | `charlie@senchat.sn` | `password123` |
+
+### ⚙️ Configuration
+
+Le fichier `backend/.env` est pré-configuré pour MySQL local sans mot de passe :
 
 ```env
 DATABASE_URL="mysql://root:@localhost:3306/senchat"
@@ -96,185 +177,282 @@ BACKEND_PORT=3000
 FRONTEND_URL=http://localhost:5173
 ```
 
-Si ton MySQL utilise un mot de passe root, modifie `DATABASE_URL` :
-```
-DATABASE_URL="mysql://root:TON_MOT_DE_PASSE@localhost:3306/senchat"
-```
+> ⚠️ Si ton MySQL utilise un mot de passe : `mysql://root:TON_MDP@localhost:3306/senchat`
 
-### 4. Initialiser la base de données
+### 🌐 Accès depuis le réseau local
 
-```bash
-cd backend
-npx prisma migrate dev --name init
-npx prisma db seed
-cd ..
-```
-
-Le seed crée 3 comptes de test :
-
-| Nom | Email | Mot de passe |
-|---|---|---|
-| Alice Diallo | alice@senchat.sn | password123 |
-| Bob Ndiaye | bob@senchat.sn | password123 |
-| Charlie Sow | charlie@senchat.sn | password123 |
-
----
-
-## Lancement
-
-Ouvre **deux terminaux** :
-
-**Terminal 1 — Backend**
-```bash
-cd backend
-npm run dev
-```
-
-**Terminal 2 — Frontend**
-```bash
-cd frontend
-npm run dev
-```
-
-Ouvre `http://localhost:5173` dans ton navigateur.
-
-### Accès réseau local (LAN)
-
-Le frontend détecte automatiquement l'IP de la machine hôte. Depuis un autre appareil sur le même réseau, utilise l'URL **Network** affichée par Vite :
+Vite expose automatiquement l'app sur le LAN. Au lancement, tu verras :
 
 ```
 ➜  Local:   http://localhost:5173/
 ➜  Network: http://192.168.x.x:5173/
 ```
 
-> Assure-toi que le pare-feu Windows autorise les ports **3000** et **5173**.
+Utilise l'URL **Network** depuis n'importe quel appareil du même réseau (téléphone, autre PC, etc.).
+
+> 💡 Le frontend détecte automatiquement le hostname pour rediriger les appels API.
+>
+> ⚠️ Pense à autoriser les ports `3000` et `5173` dans ton pare-feu Windows.
 
 ---
 
-## Architecture
+## 🗄 Architecture
 
-### Base de données
+### Schéma de base de données
 
 ```
-User ──< ConversationMember >── Conversation
-                                      │
-                                   Message
-User ──< RefreshToken
+┌────────┐         ┌────────────────────┐         ┌──────────────┐
+│  User  │────────<│ ConversationMember │>────────│ Conversation │
+└────────┘         └────────────────────┘         └──────────────┘
+    │                                                     │
+    │                                                     │
+    │              ┌─────────┐                            │
+    └─────────────<│ Message │>───────────────────────────┘
+    │              └─────────┘
+    │
+    │              ┌──────────────┐
+    └─────────────<│ RefreshToken │
+                   └──────────────┘
 ```
 
-**5 modèles Prisma** : `User`, `Conversation`, `ConversationMember`, `Message`, `RefreshToken`
+**5 modèles** (`User`, `Conversation`, `ConversationMember`, `Message`, `RefreshToken`) avec index optimisés et `onDelete: Cascade`.
 
-### API REST (`/api`)
+### Flux temps réel
 
-| Méthode | Route | Description |
-|---|---|---|
-| POST | `/auth/register` | Inscription |
-| POST | `/auth/login` | Connexion |
-| POST | `/auth/refresh` | Rafraîchir le token |
-| POST | `/auth/logout` | Déconnexion |
-| GET | `/users/me` | Profil courant |
-| PATCH | `/users/me` | Modifier profil |
-| GET | `/users/search?q=` | Recherche utilisateurs |
-| GET | `/conversations` | Liste des conversations |
-| POST | `/conversations` | Créer une conversation |
-| GET | `/conversations/:id` | Détail conversation |
-| GET | `/conversations/:id/messages` | Historique messages (pagination curseur) |
-| POST | `/files/upload` | Upload fichier |
-
-### Événements Socket.IO
-
-| Événement | Direction | Description |
-|---|---|---|
-| `message:send` | Client → Serveur | Envoyer un message |
-| `message:new` | Serveur → Client | Nouveau message reçu |
-| `message:read` | Client → Serveur | Marquer comme lu |
-| `message:status` | Serveur → Client | Mise à jour statut |
-| `typing:start` | Client → Serveur | Début de frappe |
-| `typing:stop` | Client → Serveur | Fin de frappe |
-| `typing:update` | Serveur → Client | Indicateur de frappe |
-| `presence:change` | Serveur → Client | Changement statut en ligne |
-
----
-
-## Tests
-
-### Tests unitaires (backend)
-
-```bash
-cd backend
-npm run test
 ```
-
-### Tests e2e (nécessite MySQL actif)
-
-```bash
-cd backend
-npx jest --config test/jest-e2e.json --verbose --forceExit
+┌─────────────┐       JWT in handshake        ┌─────────────────┐
+│   Client    │ ─────────────────────────────>│  Socket.IO      │
+│  (React)    │                               │   Gateway       │
+│             │       message:send            │                 │
+│             │ ─────────────────────────────>│                 │
+│             │                               │   ┌─────────┐   │
+│             │                               │   │ Rooms   │   │
+│             │       message:new             │   │ user:X  │   │
+│             │ <─────────────────────────────│   │ conv:Y  │   │
+│             │                               │   └─────────┘   │
+│             │       typing:update           │                 │
+│             │ <─────────────────────────────│                 │
+│             │                               │                 │
+│             │       presence:change         │                 │
+│             │ <─────────────────────────────│                 │
+└─────────────┘                               └─────────────────┘
 ```
 
 ---
 
-## Structure des fichiers
+## 🔌 API REST
+
+> Préfixe global : `/api`
+
+### Authentification (`/auth`)
+| Méthode | Endpoint | Description |
+|---------|----------|-------------|
+| `POST` | `/register` | Créer un compte |
+| `POST` | `/login` | Se connecter |
+| `POST` | `/refresh` | Rafraîchir l'access token |
+| `POST` | `/logout` | Déconnexion |
+
+### Utilisateurs (`/users`)
+| Méthode | Endpoint | Description |
+|---------|----------|-------------|
+| `GET` | `/me` | Profil courant |
+| `PATCH` | `/me` | Modifier nom / bio |
+| `POST` | `/me/avatar` | Upload avatar |
+| `GET` | `/search?q=` | Rechercher des utilisateurs |
+
+### Conversations (`/conversations`)
+| Méthode | Endpoint | Description |
+|---------|----------|-------------|
+| `GET` | `/` | Liste des conversations |
+| `POST` | `/` | Créer (DIRECT ou GROUP) |
+| `GET` | `/:id` | Détail d'une conversation |
+| `PATCH` | `/:id` | Modifier un groupe |
+| `POST` | `/:id/members` | Ajouter un membre |
+| `DELETE` | `/:id/members/:userId` | Retirer un membre |
+| `POST` | `/:id/leave` | Quitter un groupe |
+| `GET` | `/:id/messages` | Historique paginé (curseur) |
+| `GET` | `/:id/messages/search?q=` | Recherche dans les messages |
+
+### Fichiers (`/files`)
+| Méthode | Endpoint | Description |
+|---------|----------|-------------|
+| `POST` | `/upload` | Upload (max 25 Mo) |
+| `GET` | `/:filename` | Télécharger |
+
+### Messages (`/messages`)
+| Méthode | Endpoint | Description |
+|---------|----------|-------------|
+| `DELETE` | `/:id` | Suppression douce |
+
+---
+
+## 📡 Événements Socket.IO
+
+| Événement | Direction | Payload |
+|-----------|-----------|---------|
+| `message:send` | 📤 Client → Serveur | `{ conversationId, type, content?, fileUrl? }` |
+| `message:new` | 📥 Serveur → Client | `Message` complet |
+| `message:read` | 📤 Client → Serveur | `{ conversationId, messageId }` |
+| `message:status` | 📥 Serveur → Client | `{ messageId, readBy }` |
+| `typing:start` | 📤 Client → Serveur | `{ conversationId }` |
+| `typing:stop` | 📤 Client → Serveur | `{ conversationId }` |
+| `typing:update` | 📥 Serveur → Client | `{ userId, conversationId, isTyping }` |
+| `presence:change` | 📥 Serveur → Client | `{ userId, isOnline, lastSeen }` |
+
+---
+
+## 📁 Structure du projet
 
 ```
 senchat/
 ├── shared/
 │   └── src/
-│       ├── types/          # User, Conversation, Message interfaces
-│       └── events/         # Socket event names + payload types
+│       ├── types/              # User, Conversation, Message
+│       └── events/             # Socket events + payloads
+│
 ├── backend/
 │   ├── prisma/
-│   │   ├── schema.prisma
-│   │   └── seed.ts
+│   │   ├── schema.prisma       # 5 modèles + 3 enums
+│   │   └── seed.ts             # Données de test
 │   ├── src/
-│   │   ├── auth/           # Authentification JWT
-│   │   ├── users/          # Profil utilisateur
-│   │   ├── conversations/  # CRUD conversations
-│   │   ├── messages/       # Messages + pagination
-│   │   ├── files/          # Upload fichiers
-│   │   ├── gateway/        # Socket.IO gateway
-│   │   ├── prisma/         # PrismaService
-│   │   └── common/         # Guards, decorators, filters
-│   └── test/               # Tests e2e
+│   │   ├── auth/               # Register, login, refresh, logout
+│   │   ├── users/              # Profil, avatar, recherche
+│   │   ├── conversations/      # CRUD + gestion membres
+│   │   ├── messages/           # Historique, search, soft delete
+│   │   ├── files/              # Upload + download
+│   │   ├── gateway/            # Socket.IO + JWT auth
+│   │   ├── prisma/             # PrismaService
+│   │   └── common/
+│   │       ├── decorators/     # @Public, @CurrentUser
+│   │       ├── filters/        # GlobalExceptionFilter
+│   │       └── guards/         # JwtAuthGuard
+│   └── test/                   # Tests e2e
+│
 └── frontend/
     └── src/
-        ├── components/     # Composants réutilisables
+        ├── components/         # ChatPanel, MessageBubble, ...
         ├── features/
-        │   ├── auth/       # LoginPage, RegisterPage
-        │   ├── chat/       # ChatLayout
-        │   └── settings/   # SettingsPage
-        ├── hooks/          # useAuth, useSocket, useMessages
-        ├── lib/            # api.ts, socket.ts, utils.ts
-        └── stores/         # auth, conversation, ui (Zustand)
+        │   ├── auth/           # LoginPage, RegisterPage
+        │   ├── chat/           # ChatLayout (sidebar + panel)
+        │   └── settings/       # SettingsPage
+        ├── hooks/              # useAuth, useSocket, useMessages
+        ├── lib/                # api.ts, socket.ts, utils.ts
+        └── stores/             # Zustand: auth, conversation, ui
 ```
 
 ---
 
-## Design system
+## 🎨 Design system
 
-Couleurs inspirées du drapeau sénégalais :
+Identité visuelle inspirée du **drapeau du Sénégal** 🇸🇳
 
-| Token | Valeur | Usage |
-|---|---|---|
-| `sn-green` | `#00853F` | Couleur principale, accents |
-| `sn-gold` | `#FDEF42` | Accent secondaire (dark mode) |
-| `sn-red` | `#E31B23` | Danger, erreurs |
+| Token | Hex | Usage |
+|-------|-----|-------|
+| 🟢 `sn-green` | `#00853F` | Couleur principale, accents, statut en ligne |
+| 🟡 `sn-gold` | `#FDEF42` | Accent secondaire (mode sombre) |
+| 🔴 `sn-red` | `#E31B23` | Erreurs, actions destructives |
 
-Mode sombre activé par défaut, basculable depuis les paramètres.
+**Police** : [Inter](https://fonts.google.com/specimen/Inter) — moderne, lisible, optimisée pour les écrans.
 
----
-
-## Roadmap (v2)
-
-- [ ] Chiffrement de bout en bout (Signal Protocol)
-- [ ] Appels audio / vidéo (WebRTC)
-- [ ] Réactions aux messages
-- [ ] Messages vocaux
-- [ ] Interface en Wolof
-- [ ] Stories / statuts
+**Mode sombre** activé par défaut, basculable depuis les paramètres.
 
 ---
 
-## Licence
+## 🧪 Tests
 
-MIT
+### Tests unitaires
+```bash
+cd backend
+npm run test              # Watch mode
+npm run test:cov          # Avec couverture
+```
+
+### Tests end-to-end
+```bash
+cd backend
+npx jest --config test/jest-e2e.json --verbose --forceExit
+```
+
+> Couvre : `register`, `login`, gestion des doublons, profil avec/sans token.
+
+---
+
+## 🛠 Scripts utiles
+
+À la racine du projet :
+
+```bash
+npm run dev:backend       # Lance uniquement le backend
+npm run dev:frontend      # Lance uniquement le frontend
+npm run build             # Build des deux
+npm run lint              # Lint workspace
+```
+
+Dans `backend/` :
+
+```bash
+npx prisma studio         # GUI pour explorer la base
+npx prisma migrate dev    # Créer une nouvelle migration
+npx prisma db seed        # Réinitialiser les données de test
+```
+
+---
+
+## 🗺 Roadmap
+
+### v1 (MVP) — ✅ Livré
+- [x] Authentification JWT (register, login, refresh)
+- [x] Conversations directes & groupes
+- [x] Messages temps réel + indicateurs de frappe
+- [x] Upload de fichiers
+- [x] Statuts en ligne / lu
+- [x] Mode sombre / clair
+- [x] Responsive mobile
+
+### v2 — 🚧 À venir
+- [ ] 🎙️ **Messages vocaux** (enregistrement + lecture)
+- [ ] 📞 **Appels audio / vidéo** (WebRTC)
+- [ ] 🔐 **Chiffrement E2E** (Signal Protocol)
+- [ ] 😀 **Réactions** aux messages (emoji)
+- [ ] 📰 **Stories / Statuts** (24h)
+- [ ] 🌍 **Wolof** + autres langues locales
+- [ ] 🔔 **Notifications push** (Web Push API)
+- [ ] 🎨 **Customisation** des thèmes utilisateurs
+- [ ] 📱 **App mobile native** (React Native)
+
+---
+
+## 🤝 Contribuer
+
+Les contributions sont les bienvenues ! Pour participer :
+
+1. Fork le projet
+2. Crée une branche (`git checkout -b feat/ma-fonctionnalite`)
+3. Commit tes changements (`git commit -m 'feat: ajout de X'`)
+4. Push sur ta branche (`git push origin feat/ma-fonctionnalite`)
+5. Ouvre une Pull Request
+
+> 📝 Suis la convention [Conventional Commits](https://www.conventionalcommits.org/).
+
+---
+
+## 📄 Licence
+
+Distribué sous licence **MIT**. Voir [`LICENSE`](LICENSE) pour plus d'informations.
+
+---
+
+## 👤 Auteur
+
+**Tidiane**
+- GitHub: [@realtidiane](https://github.com/realtidiane)
+
+---
+
+<div align="center">
+
+### 🇸🇳 Fait avec ❤️ au Sénégal
+
+*Si ce projet t'a plu, n'hésite pas à laisser une ⭐ !*
+
+</div>
